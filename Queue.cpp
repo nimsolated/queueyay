@@ -2,6 +2,10 @@
 
 template <typename T>
 Queue<T>::~Queue() {
+	if (m_size == 0) {
+		return;
+	}
+
 	Node<T>* curr = m_front;
 	while (curr->m_next) {
 		curr = curr->m_next;
@@ -33,8 +37,8 @@ Node<T>* Queue<T>::back() {
 }
 
 template <typename T>
-void Queue<T>::push(const T& val) {
-	Node<T>* newNode = new Node<T>;
+void Queue<T>::push(T& val) {
+	Node<T>* newNode = new Node<T>(val);
 
 	if (m_size == 0) {
 		m_front = newNode;
@@ -67,7 +71,7 @@ void Queue<T>::emplace(Args&&... args) {
 
 template <typename T>
 T Queue<T>::pop() {
-	if (!m_front) {
+	if (m_size == 0) {
 		throw std::runtime_error("Nothing to pop from the Queue!");
 	}
 	
@@ -105,8 +109,8 @@ void Queue<T>::swap(Queue<T>& other) noexcept {
 template <typename T>
 std::ostream& operator<<(std::ostream& os, Queue<T>& q) {
 	os << "F [";
-	if (q.m_front) {
-		Node<T>* curr = q.m_front;
+	if (q.front()) {
+		Node<T>* curr = q.front();
 		do {
 			os << curr->m_data;
 			if (curr->m_next) {

@@ -3,10 +3,11 @@
 
 template <typename various>
 struct Node {
-    various m_data;
     Node<various>* m_next = nullptr;
+    various m_data;
 
     Node() = default;
+    Node(various data) : m_data(data) {}
     template <typename... Args>
     Node(Args&&... args) : m_data(std::forward<Args>(args)...) {}
 };
@@ -24,7 +25,7 @@ public:
     size_t size();
     Node<T>* front();
     Node<T>* back();
-    void push(const T& val);
+    void push(T& val);
     template <typename... Args>
     void emplace(Args&&... args);
     T pop();
