@@ -68,7 +68,7 @@ void Queue<T>::emplace(Args&&... args) {
 template <typename T>
 T Queue<T>::pop() {
 	if (!m_front) {
-		throw runtime_error("Nothing to pop from the Queue!");
+		throw std::runtime_error("Nothing to pop from the Queue!");
 	}
 	
 	T r = m_front->m_data;
@@ -116,8 +116,8 @@ std::ostream& operator<<(std::ostream& os, Queue<T>& q) {
 			else {
 				curr = nullptr;
 			}
-		} while(curr)
+		} while (curr);
 	}
-	os << "] B"
+	os << "] B";
 	return os;
 }

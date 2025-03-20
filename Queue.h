@@ -3,9 +3,12 @@
 
 template <typename various>
 struct Node {
-    Node() = default;
     various m_data;
     Node<various>* m_next = nullptr;
+
+    Node() = default;
+    template <typename... Args>
+    Node(Args&&... args) : m_data(std::forward<Args>(args)...) {}
 };
 
 template <typename T>
