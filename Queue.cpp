@@ -1,6 +1,18 @@
 #include "Queue.h"
 
 template <typename T>
+Queue<T>::~Queue() {
+	Node<T>* curr = m_front;
+	while (curr->m_next) {
+		curr = curr->m_next;
+		m_front->m_next = nullptr;
+		delete m_front;
+		m_front = curr;
+	}
+	delete curr;
+}
+
+template <typename T>
 bool Queue<T>::isEmpty() {
 	return m_size == 0;
 }
@@ -91,13 +103,21 @@ void Queue<T>::swap(Queue<T>& other) noexcept {
 }
 
 template <typename T>
-Queue<T>::~Queue() {
-	Node<T>* curr = m_front;
-	while (curr->m_next) {
-		curr = curr->m_next;
-		m_front->m_next = nullptr;
-		delete m_front;
-		m_front = curr;
+std::ostream& operator<<(std::ostream& os, Queue<T>& q) {
+	os << "F [";
+	if (q.m_front) {
+		Node<T>* curr = q.m_front;
+		do {
+			os << curr->m_data;
+			if (curr->m_next) {
+				os << ", ";
+				curr = curr->m_next;
+			}
+			else {
+				curr = nullptr;
+			}
+		} while(curr)
 	}
-	delete curr;
+	os << "] B"
+	return os;
 }

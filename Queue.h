@@ -29,6 +29,4 @@ public:
 };
 
 template <typename T>
-std::ostream& operator<<(std::ostream& os, Queue<T>& q) {
-    return os; // TODO: output each element from the Queue
-}
+std::ostream& operator<<(std::ostream& os, Queue<T>& q);
