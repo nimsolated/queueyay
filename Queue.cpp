@@ -78,7 +78,15 @@ T Queue<T>::pop() {
 template <typename T>
 void Queue<T>::swap(Queue<T>& other) noexcept {
 	if (this != &other) {
-		return;
+		Node<T>* tempnode = this->m_front;
+		this->m_front = other.m_front;
+		other.m_front = tempnode;
+		tempnode = this->m_back;
+		this->m_back = other.m_back;
+		other.m_back = tempnode;
+		size_t tempsizet = this->m_size;
+		this->m_size = other.m_size;
+		other.m_size = tempsizet;
 	}
 }
 

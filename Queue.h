@@ -11,7 +11,7 @@ struct Node {
 template <typename T>
 class Queue {
 private:
-    size_t = m_size;
+    size_t m_size;
     Node<T>* m_front;
     Node<T>* m_back;
 public:
