@@ -28,7 +28,7 @@ int main()
         std::cout << "qee: " << qee << std::endl << "poo: " << poo << std::endl;
         qee.swap(poo);
         std::cout << "qee: " << qee << std::endl << "poo: " << poo << std::endl;
-        qee.back()->m_data = "Fart F. Fartington";
+        qee.back()->m_data = (qee.back() == qee.front()) ? "Fart F. Fartington" : "Piss P. Pissington";
         std::cout << "qee: " << qee << std::endl << "poo: " << poo << std::endl;
     }
     catch (const std::runtime_error& e) {
