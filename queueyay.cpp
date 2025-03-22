@@ -1,4 +1,4 @@
-#include "Queue.cpp"
+#include "Queue.h"
 
 template <typename Various>
 void QueueInfo(Queue<Various>& q) {
