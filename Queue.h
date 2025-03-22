@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
 
-template <typename various>
+template <typename Various>
 struct Node {
-    Node<various>* m_next = nullptr;
-    various m_data;
+    Node<Various>* m_next = nullptr;
+    Various m_data;
 
     Node() = default;
-    Node(various data) : m_data(data) {}
+    Node(Various data) : m_data(data) {}
     template <typename... Args>
     Node(Args&&... args) : m_data(std::forward<Args>(args)...) {}
 };
@@ -40,11 +40,11 @@ public:
     size_t size() {
         return m_size;
     }
-    Node<T>* front() {
-        return m_front;
+    T front() {
+        return m_front->m_data;
     }
-    Node<T>* back() {
-        return m_back;
+    T back() {
+        return m_back->m_data;
     }
     void push(T& val) {
         Node<T>* newNode = new Node<T>(val);
@@ -108,24 +108,22 @@ public:
             other.m_size = tempsizet;
         }
     }
-};
-
-template <typename T>
-std::ostream& operator<<(std::ostream& os, Queue<T>& q) {
-    os << "F [";
-    if (q.front()) {
-        Node<T>* curr = q.front();
-        do {
-            os << curr->m_data;
-            if (curr->m_next) {
-                os << ", ";
-                curr = curr->m_next;
-            }
-            else {
-                curr = nullptr;
-            }
-        } while (curr);
+    friend std::ostream& operator<<(std::ostream& os, Queue<T>& q) {
+        os << "F [";
+        if (q.m_front) {
+            Node<T>* curr = q.m_front;
+            do {
+                os << curr->m_data;
+                if (curr->m_next) {
+                    os << ", ";
+                    curr = curr->m_next;
+                }
+                else {
+                    curr = nullptr;
+                }
+            } while (curr);
+        }
+        os << "] B";
+        return os;
     }
-    os << "] B";
-    return os;
-}
+};
